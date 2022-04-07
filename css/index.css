@@ -1,0 +1,46 @@
+@import './styles.css';
+
+/* .resumCartModal {} */
+
+.resumCartModal div:last-child {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    width: 75%;
+    font-weight: bold;
+}
+
+.resumCartModal div:last-child span:last-child{
+    text-align: center;
+}
+
+.resumCartModal div{
+    border-bottom: 1px solid black;
+}
+
+
+.modalTitles{
+    display: grid;
+    grid-template-columns: 2fr repeat(6, 1fr);
+}
+.modalTitles span{
+    text-align: center;
+    border-right: 1px solid black;
+}
+
+.modalRow {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr repeat(6, 1fr);
+}
+
+.modalRow span {
+    text-align: center;
+}
+
+.modalRow span:first-of-type {
+    text-align: start;
+}
+
+.modal-dialog{
+    max-width: 700px;
+}
