@@ -18,6 +18,7 @@ function buy(id) {
   // 2. Add found product to the cartList array
   const product = products.find((el) => el.id === id);
   if (product) cartList.push(product);
+  totalProducts();
 }
 
 // Exercise 2
@@ -102,6 +103,7 @@ function removeFromCart(id) {
 
   if (cart[elementToReduce].quantity > 1) cart[elementToReduce].quantity--;
   else cart.splice(elementToReduce, 1);
+  totalProducts();
 }
 
 // Exercise 9
@@ -117,17 +119,21 @@ function printCart() {
   }
   const fragment = document.createDocumentFragment();
   const div = document.createElement('div');
-  div.classList.add('modalTitles');
+  div.classList.add('modalRow');
   const definition = document.createElement('span');
   definition.textContent = 'Product';
   const price = document.createElement('span');
-  price.textContent = 'Price';
+  price.textContent = 'Unit price';
+  price.classList.add('displayNone');
   const quantity = document.createElement('span');
-  quantity.textContent = 'Quantity';
+  quantity.classList.add('displayNone');
+  quantity.textContent = 'Quan.';
   const priceBeforDescount = document.createElement('span');
-  priceBeforDescount.textContent = 'Before discount';
+  priceBeforDescount.textContent = 'Bf. disc.';
+  priceBeforDescount.classList.add('displayNone');
   const finalPrice = document.createElement('span');
   finalPrice.textContent = 'Final price';
+  const space = document.createElement('span');
   div.append(definition);
   div.append(price);
   div.append(quantity);
@@ -143,39 +149,39 @@ function printCart() {
     div.append(item);
     const price = document.createElement('span');
     price.textContent = `${el.price} €`;
+    price.classList.add('displayNone');
     div.append(price);
     const quantity = document.createElement('span');
+    quantity.classList.add('displayNone');
     quantity.textContent = el.quantity;
     div.append(quantity);
     // const total = document.createElement('span');
+    const subtotal = document.createElement('span');
+    const total = document.createElement('span');
     if (el.subtotal) {
-      const subtotal = document.createElement('span');
-      subtotal.textContent = `${el.subtotal} €`;
-      div.append(subtotal);
-      const subtotalWithDiscount = document.createElement('span');
-      subtotalWithDiscount.textContent = `${el.subtotalWithDiscount.toFixed(
-        2
-      )} €`;
-      div.append(subtotalWithDiscount);
+      subtotal.textContent = `${el.subtotal}`;
+      total.textContent = `${el.subtotalWithDiscount.toFixed(2)} €`;
     } else {
-      const discount = document.createElement('span');
-      discount.textContent = '-';
-      div.append(discount);
-      const total1 = document.createElement('span');
-      total1.textContent = `${(el.price * el.quantity).toFixed(2)} €`;
-      div.append(total1);
+      subtotal.textContent = '-';
+      total.textContent = `${(el.price * el.quantity).toFixed(2)}€`;
     }
+    subtotal.classList.add('displayNone');
+    div.append(subtotal);
+    div.append(total);
     const buttonDelete = document.createElement('button');
     buttonDelete.setAttribute('data-removeidproduct', el.id);
     buttonDelete.textContent = '-';
+    buttonDelete.classList.add('buttonModal');
     div.append(buttonDelete);
     const buttonAdd = document.createElement('button');
     buttonAdd.setAttribute('data-addidproduct', el.id);
     buttonAdd.textContent = '+';
+    buttonAdd.classList.add('buttonModal');
     div.append(buttonAdd);
     fragment.append(div);
   });
   const totalDiv = document.createElement('div');
+  totalDiv.classList.add('modalRow');
   const descriptionTotal = document.createElement('span');
   descriptionTotal.textContent = 'Total';
   const amountTotal = document.createElement('span');
@@ -192,6 +198,7 @@ function printCart() {
       const id = Number(e.target.getAttribute('data-addidproduct'));
       buy(id);
       printCart();
+      totalProducts();
     });
   });
 
@@ -202,6 +209,7 @@ function printCart() {
       const firstIndexToRemove = cartList.findIndex((el) => el.id === id);
       cartList.splice(firstIndexToRemove, 1);
       printCart();
+      totalProducts();
     });
   });
 }
@@ -210,3 +218,29 @@ function open_modal() {
   console.log('Open Modal');
   printCart();
 }
+
+/* OTHER FUNCTIONS */
+let numProdu = 0;
+const totalProducts = () => {
+  generateCart();
+  numProdu = cart.reduce((acc, curr) => acc + curr.quantity, 0);
+  document.getElementById('count_product').textContent = numProdu;
+};
+
+totalProducts();
+
+document.getElementById('buttonModalLink').addEventListener('click', (e) => {
+  e.preventDefault();
+  checkEmptyCartModal();
+});
+
+const checkEmptyCartModal = () => {
+  console.log(numProdu);
+  if (numProdu) location.href = 'checkout.html';
+  else {
+    document.getElementById('buttonModal').textContent = 'Your cart is empty!';
+    setTimeout(() => {
+      document.getElementById('buttonModal').textContent = 'Checkout';
+    }, 2000);
+  }
+};

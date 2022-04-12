@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "cooking oil",
+    "name": "The BURGER Burger",
     "price": 10.5,
     "type": "grocery",
     "offer": {
@@ -11,13 +11,13 @@
   },
   {
     "id": 2,
-    "name": "Pasta",
+    "name": "BBQ Burger",
     "price": 6.25,
     "type": "grocery"
   },
   {
     "id": 3,
-    "name": "Instant cupcake mixture",
+    "name": "Classic Burger",
     "price": 5,
     "type": "grocery",
     "offer": {
@@ -27,38 +27,38 @@
   },
   {
     "id": 4,
-    "name": "All-in-one",
-    "price": 260,
+    "name": "Chips and Wings",
+    "price": 6,
     "type": "beauty"
   },
   {
     "id": 5,
-    "name": "Zero Make-up Kit",
-    "price": 20.5,
+    "name": "Mexican TEX-MEX",
+    "price": 5,
     "type": "beauty"
   },
   {
     "id": 6,
-    "name": "Lip Tints",
-    "price": 12.75,
+    "name": "Chicken Fingers",
+    "price": 5,
     "type": "beauty"
   },
   {
     "id": 7,
-    "name": "Lawn Dress",
-    "price": 15,
+    "name": "Water",
+    "price": 2,
     "type": "clothes"
   },
   {
     "id": 8,
-    "name": "Lawn-Chiffon Combo",
-    "price": 19.99,
+    "name": "Beer",
+    "price": 3,
     "type": "clothes"
   },
   {
     "id": 9,
-    "name": "Toddler Frock",
-    "price": 9.99,
+    "name": "Wine",
+    "price": 9,
     "type": "clothes"
   }
 ]
